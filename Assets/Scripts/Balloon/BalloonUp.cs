@@ -9,15 +9,19 @@ public class BalloonUp : MonoBehaviour {
 	bool flipped = false;
 	Transform transform;
 	float timer = 0;
+	float timeStamp = 0;
 	// Use this for initialization
 	void Start () {
 		rigidBody	= GetComponent<Rigidbody2D>();
 		transform = GetComponent<Transform>();
+		timeStamp = Time.time;
 	}
 
 	// Update is called once per frame
 	void Update () {
-
+		float deltaTime  = Time.time - timeStamp;
+		if(deltaTime > 5f)
+			Destroy(gameObject);
 	}
 
 	void FixedUpdate () {

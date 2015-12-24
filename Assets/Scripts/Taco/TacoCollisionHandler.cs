@@ -18,10 +18,10 @@ public class TacoCollisionHandler : MonoBehaviour {
 			if(collision.gameObject.tag == "Player")
 			{
 				Debug.Log("Player Hit");
-				Controller controller  = collision.gameObject.GetComponent<Controller>();
-				controller.ReceiveDamage();
+				DougieBehaviour dougie  = collision.gameObject.GetComponent<DougieBehaviour>();
+				dougie.ReceiveDamage();
 
-                
+
 			}
 	}
 
