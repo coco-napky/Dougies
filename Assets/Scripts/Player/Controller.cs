@@ -3,16 +3,43 @@ using System.Collections;
 
 public class Controller : MonoBehaviour {
 
-	public KeyCode directionSwitch,
-                 up,
-	               fire,
+	public KeyCode 
                  up_Joy,
                  directionSwitch_Joy,
                  fire_Joy;
+  private bool jump,shoot, switchDirection;
 
   public DougieStates states;
 
-  void Awake(){
+  public void OnjumpButton()
+    {
+        jump = true;
+    }
+
+    public void OffjumpButton()
+    {
+        jump = false;
+    }
+
+    public void OnfireButton()
+    {
+        shoot= true;
+    }
+
+    public void OfffireButton()
+    {
+        shoot = false;
+
+    }
+    public void OnswitchButton()
+    {
+        switchDirection= true;
+    }
+
+
+
+    void Awake(){
+
 
   }
 
@@ -21,10 +48,16 @@ public class Controller : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		states.goingUp 	= Input.GetKey(up)       || Input.GetKey(up_Joy);
-    states.shooting = Input.GetKeyDown(fire) || Input.GetKeyDown(fire_Joy);
 
-		if( Input.GetKeyDown(directionSwitch)|| Input.GetKeyDown(directionSwitch_Joy))
-			  states.goingLeft = !states.goingLeft;
+		states.goingUp 	= jump   || Input.GetKey(up_Joy);
+        states.shooting = shoot || Input.GetKey(fire_Joy);
+        if (shoot)
+            shoot = false;
+
+        if (switchDirection || Input.GetKeyDown(directionSwitch_Joy))
+        {
+            states.goingLeft = !states.goingLeft;
+            switchDirection = false;
+        }
 	}
 }
