@@ -96,6 +96,7 @@ public class PauseController : MonoBehaviour {
 
                 if (state == 3)
                 {
+                    Time.timeScale = 1;
                     Application.LoadLevel("StartMenu");
                 }
 
