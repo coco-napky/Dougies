@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TacoBehavior : MonoBehaviour {
 	public GameObject tacoExplosion;
-	Transform transform;
+	Transform tr;
 	TacoBehavior tacoBehavior;
 	float start = 0f;
 	public float lifespan = 0.25f;
@@ -12,7 +12,7 @@ public class TacoBehavior : MonoBehaviour {
 	void Start () {
 
 			tacoBehavior = GetComponent<TacoBehavior>();
-			transform = GetComponent<Transform>();
+			tr= GetComponent<Transform>();
 			start = Time.time;
 	}
 
@@ -24,7 +24,7 @@ public class TacoBehavior : MonoBehaviour {
 
 	public void Explode(){
 		//Show explosion
-		Instantiate(tacoExplosion,transform.position,transform.rotation);
+		Instantiate(tacoExplosion,tr.position,tr.rotation);
 		//Clean projectile from memory.
 		Destroy(gameObject);
 	}
