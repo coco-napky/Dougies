@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class DougieBehaviour : MonoBehaviour {
+public class DougieBehaviour : NetworkBehaviour {
 
 	public  GameObject taco;
 	private Rigidbody2D rigidbody;
@@ -10,6 +11,7 @@ public class DougieBehaviour : MonoBehaviour {
 
 	private DougieAttributes attributes;
 	private DougieStates states;
+
 	// Use this for initialization
 	void Awake(){
 		transform  = GetComponent<Transform>();
@@ -29,7 +31,7 @@ public class DougieBehaviour : MonoBehaviour {
 
 	void FixedUpdate () {
 		Move();
-		Shoot();
+		CmdShoot();
 	}
 
 	void Move(){
@@ -45,7 +47,8 @@ public class DougieBehaviour : MonoBehaviour {
 			rigidbody.velocity = new Vector2(attributes.horizontalSpeed*-1,  rigidbody.velocity.y);
 	}
 
-	void Shoot(){
+
+	void CmdShoot(){
 		//check if taco shooting cooldown is off, else to do nothing
 		if(Time.time < attributes.nextTacoShot || !states.shooting)
 				return;
@@ -69,6 +72,8 @@ public class DougieBehaviour : MonoBehaviour {
 			tacoProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(attributes.horizontalSpeedTaco,0);
 		else
 			tacoProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(attributes.horizontalSpeedTaco*-1,0);
+
+		NetworkServer.Spawn(tacoProjectile);
 	}
 
 	public void ReceiveDamage(){

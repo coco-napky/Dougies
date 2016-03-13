@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Controller : MonoBehaviour {
+public class Controller : NetworkBehaviour {
 
 	public KeyCode directionSwitch,
                  up,
@@ -21,6 +22,8 @@ public class Controller : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(!isLocalPlayer)
+			return;
 		states.goingUp 	= Input.GetKey(up)       || Input.GetKey(up_Joy);
     states.shooting = Input.GetKeyDown(fire) || Input.GetKeyDown(fire_Joy);
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
-public class DougieAttributes : MonoBehaviour {
+using UnityEngine.Networking;
+public class DougieAttributes : NetworkBehaviour {
 
 	public float hp = 3;
 	public Vector2  floatingForce;
