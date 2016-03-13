@@ -29,7 +29,6 @@ public class HorizontalScreenLimit : MonoBehaviour {
 		else
 				widthOffset *= 1.25f;
 		Vector3 destination = new Vector3(oppositeEndGameObject.transform.position.x + widthOffset, collisionTransform.position.y,0);
-		collisionTransform.position = destination;
-		Debug.Log("Width of collision object : " + widthOffset);
+		collisionTransform.position = destination;	
 	}
 }

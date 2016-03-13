@@ -15,9 +15,8 @@ public class DougieBehaviour : NetworkBehaviour {
 	// Use this for initialization
 	void Awake(){
 		transform  = GetComponent<Transform>();
-		rigidbody  = GetComponent<Rigidbody2D>();
-
 	}
+	
 	void Start () {
 		states	   = GetComponent<DougieStates>();
 		attributes = GetComponent<DougieAttributes>();
@@ -26,10 +25,14 @@ public class DougieBehaviour : NetworkBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(!isLocalPlayer)
+			return;
 		HozizontalFlip();
 	}
 
 	void FixedUpdate () {
+		if(!isLocalPlayer)
+			return;
 		Move();
 		CmdShoot();
 	}
@@ -47,11 +50,11 @@ public class DougieBehaviour : NetworkBehaviour {
 			rigidbody.velocity = new Vector2(attributes.horizontalSpeed*-1,  rigidbody.velocity.y);
 	}
 
-
+	[Command]
 	void CmdShoot(){
 		//check if taco shooting cooldown is off, else to do nothing
 		if(Time.time < attributes.nextTacoShot || !states.shooting)
-				return;
+			return;
 		states.shooting = false;
 		//Set time for next taco shot
 		attributes.nextTacoShot = Time.time + attributes.tacoFireRate;
