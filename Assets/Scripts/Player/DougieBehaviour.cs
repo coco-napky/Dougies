@@ -40,10 +40,12 @@ public class DougieBehaviour : MonoBehaviour {
 
 		// X axis displacement
 		if (states.goingLeft)
-			rigidbody.velocity = new Vector2(attributes.horizontalSpeed,rigidbody.velocity.y);
-		else
-			rigidbody.velocity = new Vector2(attributes.horizontalSpeed*-1,  rigidbody.velocity.y);
-	}
+        //    rigidbody.AddForce(attributes.movingforce);
+        rigidbody.velocity = new Vector2(attributes.horizontalSpeed,rigidbody.velocity.y);
+        else
+            //rigidbody.AddForce(attributes.movingforce*-1);
+        rigidbody.velocity = new Vector2(attributes.horizontalSpeed*-1,  rigidbody.velocity.y);
+    }
 
 	void Shoot(){
 		//check if taco shooting cooldown is off, else to do nothing
